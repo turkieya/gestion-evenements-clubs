@@ -1,0 +1,64 @@
+    <!-- Header -->
+    <div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-white d-inline-block mb-0">Membres</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+      <div class="row justify-content-center">
+        <div class=" col ">
+          <div class="card">
+            <div class="card-header bg-transparent">
+              <h3 class="mb-0">Modifier Membre</h3>
+            </div>
+           
+              
+                <form [formGroup]="editForm" > 
+                    <div class="form-group ">
+                        <label >Nom du club</label>
+                          <input type="text" formControlName="username" class="form-control" placeholder="Nom du club" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                              <div *ngIf="f.username.errors.required">Nom du club est obligatoire</div>
+                          </div>    
+                       </div>
+                      <div class="form-group">
+                      <label >Numero de telephonne</label>
+                        <input type="number" formControlName="numtel" placeholder="Numero de telephonne" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.numtel.errors }" />
+                        <div *ngIf="submitted && f.numtel.errors" class="invalid-feedback">
+                          <div *ngIf="f.numtel.errors.required">Numero telephonne est obligatoire</div>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                       <label>Adresse email</label>
+                        <input type="email" formControlName="email" placeholder="Adresse e-mail" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                          <div *ngIf="f.email.errors.required">Adresse e-mail est obligatoire</div>
+                          <div *ngIf="f.email.errors.email">Adresse e-mail doit être une adresse e-mail valide</div>
+                        </div>
+                     </div>
+                      <div class="form-group ">
+                        <label>Mot de passe</label>
+                          <input type="password" placeholder="Mot de passe" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                              <div *ngIf="f.password.errors.required">Mot de passe est obligatoire</div>
+                              <div *ngIf="f.password.errors.minlength">Mot de passe doit être au moins de 6 caractères</div>
+                          </div>
+                      </div>          
+                    <div class="text-center">
+                        <button class="btn btn-primary mr-1" (click)="onSubmit()">Editer</button>
+                        <button class="btn btn-secondary" type="reset" (click)="onReset()">Effacer</button>
+                    </div>
+                </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+            

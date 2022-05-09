@@ -1,0 +1,78 @@
+ <!-- Header -->
+ <div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-white d-inline-block mb-0">Matériels</h6>
+        </div>
+        <div  *ngIf="isAdmin()" class="col-lg-6 col-5 text-right">
+          <a href="#" class="btn btn-sm btn-neutral" data-bs-toggle="modal" data-bs-target="#AddMaterielModal">Ajouter</a>
+        </div>
+      </div>
+    </div> 
+  </div>
+</div>
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col-xl-8">      
+        <div class="grid">
+          <article *ngFor="let materiel of Materiel ; let i =index">
+              <div class="text">
+                  <h3>{{materiel.libelle}}</h3>
+                  <p>{{materiel.description}}</p>
+                  <span>quantité disponible : {{materiel.quantite}}</span><br><br>
+                  <button  *ngIf="isAdmin()" type="button" [routerLink]="['/acceuil','materiel','edit_materiel',materiel._id]"
+                  class="btn  btn-outline-primary" >
+                  <span class="btn-inner--icon"><i class="fas fa-edit"></i></span> </button>
+                  <button  *ngIf="isAdmin()" type="button" (click)="removeMateriel(materiel,i)" class="btn  btn-outline-danger">
+                    <span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
+                  </button>
+              </div>
+          </article>
+        </div>
+    </div>
+  </div>
+</div>
+        
+<!-- Modal -->
+<div class="modal fade" id="AddMaterielModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter Matériel</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="MaterielForm" > 
+          <div class="form-group ">
+            <label >Libellé</label>
+              <input type="text" formControlName="libelle" class="form-control" placeholder="Libellé" [ngClass]="{ 'is-invalid': submitted && f.libelle.errors }" />
+              <div *ngIf="submitted && f.libelle.errors" class="invalid-feedback">
+                  <div *ngIf="f.libelle.errors.required">Libellé est obligatoire</div>
+              </div>    
+           </div>
+          <div class="form-group">
+          <label >Quantité</label>
+            <input type="number" formControlName="quantite" placeholder="Quantité" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.quantite.errors }" />
+            <div *ngIf="submitted && f.quantite.errors" class="invalid-feedback">
+              <div *ngIf="f.quantite.errors.required">Quantité est obligatoire</div>
+            </div>
+         </div>
+    
+         <div class="form-group">
+           <label>Description</label>
+            <input type="text" formControlName="description" placeholder="Description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+              <div *ngIf="f.description.errors.required">Description est obligatoire</div>
+            </div>
+         </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="reset" class="btn btn-secondary" (click)="onReset()" >Effacer</button>
+        <button type="submit" class="btn btn-primary" (click)="onSubmitMat()">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>

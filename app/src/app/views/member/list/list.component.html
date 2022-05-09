@@ -1,0 +1,122 @@
+<!-- Header -->
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-white d-inline-block mb-0">Membres</h6>
+        </div>
+        <div class="col-lg-6 col-5 text-right">
+          <a href="#" class="btn btn-sm btn-neutral" data-bs-toggle="modal" data-bs-target="#AddMemberModal" data-backdrop="false" 
+          >Ajouter</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <!-- Card header -->
+        <div class="card-header border-0">
+          <h3 class="mb-0">Liste Membres</h3>
+        </div>
+        <!-- Light table -->
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" class="sort" data-sort="name">Nom du club</th>
+                <th scope="col" class="sort" data-sort="budget">Adresse email</th>
+                <th scope="col" class="sort" data-sort="status">Numéro de téléphone</th>
+                <th scope="col" class="sort" data-sort="completion">Actions</th>
+              </tr>
+            </thead>
+            <tr  *ngIf="taille()" colspan="10" > <td > Aucun élément trouvé</td> </tr>
+            <tbody class="list" *ngFor="let user of User ; let i =index">
+              <tr  *ngIf="user.role==role" >
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.numtel}}</td>
+                <td >   
+                  <button class="btn btn-outline-primary" type="button" [routerLink]="['/acceuil','membre','edit_membre',user._id]" >
+                    <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
+                  </button>
+                    <button type="button" (click)="removeUser(user,i)" class="btn btn-outline-danger">
+                      <span class="btn-inner--icon"> <i class="fas fa-user-times"></i> </span>
+                   </button>
+                 </td>
+             </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+  
+<!-- Modal -->
+<div class="modal fade" id="AddMemberModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter Responsable Club</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="MemberForm" > 
+          <div class="form-group ">
+            <label >Nom du club</label>
+              <input type="text" formControlName="username" class="form-control" placeholder="Nom du club" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+              <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                  <div *ngIf="f.username.errors.required">Nom du club est obligatoire</div>
+              </div>    
+           </div>
+          <div class="form-group">
+          <label >Numero de telephonne</label>
+            <input type="number" formControlName="numtel" placeholder="Numero de telephonne" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.numtel.errors }" />
+            <div *ngIf="submitted && f.numtel.errors" class="invalid-feedback">
+              <div *ngIf="f.numtel.errors.required">Numero telephonne est obligatoire</div>
+            </div>
+         </div>
+         <div class="form-group ">
+          <label>Role</label>
+          <select formControlName="role" class="form-control" >
+            <option>Membre</option>
+          </select>
+          </div>
+         <div class="form-group">
+           <label>Adresse email</label>
+            <input type="email" formControlName="email" placeholder="Adresse e-mail" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">Adresse e-mail est obligatoire</div>
+              <div *ngIf="f.email.errors.email">Adresse e-mail doit être une adresse e-mail valide</div>
+            </div>
+         </div>
+          <div class="form-group ">
+            <label>Mot de passe</label>
+              <input type="password" placeholder="Mot de passe" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <div *ngIf="f.password.errors.required">Mot de passe est obligatoire</div>
+                  <div *ngIf="f.password.errors.minlength">Mot de passe doit être au moins de 6 caractères</div>
+              </div>
+          </div>
+          <div class="form-group ">
+              <label>Confirmer Mot de passe</label>
+              <input type="password" placeholder="Confirmer votre mot de passe" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+              <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                  <div *ngIf="f.confirmPassword.errors.required">Confirmez le mot de passe </div>
+                  <div *ngIf="f.confirmPassword.errors.mustMatch">Les mots de passe doivent correspondre </div>
+              </div>
+          </div>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="reset" class="btn btn-secondary" (click)="onReset()" >Effacer</button>
+        <button type="submit" class="btn btn-primary" (click)="onSubmit()">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>

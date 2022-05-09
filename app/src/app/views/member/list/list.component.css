@@ -1,0 +1,11 @@
+
+.modal {
+    z-index: 1101;
+}
+
+.thead-light th{
+    text-align: center;
+}
+.list td{
+    text-align: center;
+}

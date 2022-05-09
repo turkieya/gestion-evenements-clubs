@@ -1,0 +1,75 @@
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-white d-inline-block mb-0">Calendrier</h6>
+        </div>
+        <div *ngIf="isAdmin()" class="col-lg-6 col-5 text-right">
+          <a class="btn btn-sm btn-neutral" data-bs-toggle="modal" data-bs-target="#AddeventModal">Ajouter</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="cal">
+          <full-calendar [options]="calendarOptions"></full-calendar>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="AddeventModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ajouter Evenement</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form> 
+              <div class="form-group ">
+                  <label >Titre</label>
+                    <input type="text"class="form-control" placeholder="Titre"  [(ngModel)]="event.title"
+                    [ngModelOptions]="{standalone: true}" required />
+                 </div>
+                 <div class="form-group ">
+                  <label >Date</label>
+                    <input type="date"class="form-control" placeholder="Date"  [(ngModel)]="event.date"
+                    [ngModelOptions]="{standalone: true}" required />
+                 </div>
+                 <div class="form-group ">
+                  <label >Debut</label>
+                    <input type="time"class="form-control" placeholder="Debut"  [(ngModel)]="event.debut"
+                    [ngModelOptions]="{standalone: true}" required />
+                 </div>
+                 <div class="form-group ">
+                  <label >Fin</label>
+                    <input type="time"class="form-control" placeholder="Fin"  [(ngModel)]="event.fin"
+                    [ngModelOptions]="{standalone: true}" required />
+                 </div>
+                 <div class="form-group ">
+                  <label >Salle</label>
+                  <select [(ngModel)]="event.salle" [ngModelOptions]="{standalone: true}" class="form-control"  >
+                    <option></option>
+                   <option  *ngFor="let event of list_salle" >{{event.num}}</option>
+                  </select>
+                 </div> 
+         
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="reset" class="btn btn-secondary" (click)="onReset()" >Effacer</button>
+            <button type="submit" class="btn btn-primary" (click)="saveEvent()">Ajouter</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+ 

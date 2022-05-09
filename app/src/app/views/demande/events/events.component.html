@@ -1,0 +1,68 @@
+
+<!-- Header -->
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-white d-inline-block mb-0">Événements</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <!-- Card header -->
+        <div class="card-header border-0">
+          <h3 class="mb-0">Liste Événements</h3>
+        </div>
+        <!-- Light table -->
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" class="sort" >club</th>
+                <th scope="col" class="sort" >Titre</th>
+                <th scope="col" class="sort" >Date </th>
+                <th scope="col" class="sort" >Debut </th>
+                <th scope="col" class="sort" >Fin </th>
+                <th scope="col" class="sort" >Matériels</th>
+                <th scope="col" class="sort" >Quantité</th>
+                <th scope="col" class="sort" >Salle</th>
+                <th scope="col" class="sort">Etat</th>
+                <th scope="col" class="sort" >Actions</th>
+              </tr>
+            </thead>
+              <tr  *ngIf="taille()" colspan="10" > <td > Aucun élément trouvé</td> </tr>
+            <tbody class="list" *ngFor="let demande of Demande ; let i =index">
+              <tr *ngIf="demande.etat===etat_ev"  >
+                <td  >{{demande.nom_club}}</td>
+                <td  >{{demande.title}}</td>
+                <td  >{{demande.date}}</td>
+                <td  >{{demande.debut}}</td>
+                <td  >{{demande.fin}}</td>
+                <td  >{{demande.materiels}}</td>
+                <td  >{{demande.qtemat}}</td>
+                <td  >{{demande.salle}}</td>
+                <td  >{{demande.etat}}</td>     
+                <td >
+                  <button class="btn btn-icon btn-primary" (click)="accepterDemande(demande,i)" type="button"  >
+                    <span class="btn-inner--icon"><i class="far fa-calendar-check"></i></span>
+                  </button>
+                  <button type="button" (click)="removeDemande(demande,i)" class="btn btn-icon btn-danger">
+                      <span class="btn-inner--icon"> <i class="far fa-calendar-times"></i> </span>
+                   </button>
+               </td>  
+             </tr>
+            </tbody>
+          </table>
+        </div>    
+      </div>
+    </div>
+  </div>
+ </div>
+ 

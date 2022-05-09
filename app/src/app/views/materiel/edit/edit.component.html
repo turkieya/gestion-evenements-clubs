@@ -1,0 +1,53 @@
+    <!-- Header -->
+    <div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-white d-inline-block mb-0">Matériels</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+      <div class="row justify-content-center">
+        <div class=" col ">
+          <div class="card">
+            <div class="card-header bg-transparent">
+              <h3 class="mb-0">Modifier Matériel</h3>
+            </div>
+           
+    <form [formGroup]="editForm" > 
+        <div class="form-group ">
+            <label >Libellé</label>
+              <input type="text" formControlName="libelle" class="form-control" placeholder="Libellé" [ngClass]="{ 'is-invalid': submitted && f.libelle.errors }" />
+              <div *ngIf="submitted && f.libelle.errors" class="invalid-feedback">
+                  <div *ngIf="f.libelle.errors.required">Libellé est obligatoire</div>
+              </div>    
+           </div>
+          <div class="form-group">
+          <label >Quantité</label>
+            <input type="number" formControlName="quantite" placeholder="Quantité" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.quantite.errors }" />
+            <div *ngIf="submitted && f.quantite.errors" class="invalid-feedback">
+              <div *ngIf="f.quantite.errors.required">Quantite est obligatoire</div>
+            </div>
+         </div>
+
+          <div class="form-group ">
+            <label>Description</label>
+            <textarea placeholder="Description" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea> 
+            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                <div *ngIf="f.description.errors.required">Description est obligatoire</div>
+            </div>
+          </div>
+        <div class="text-center">
+            <button class="btn btn-primary mr-1" (click)="onSubmit()">Editer</button>
+            <button class="btn btn-secondary" type="reset" (click)="onReset()">Effacer</button>
+        </div>
+    </form>
+</div>
+</div>
+</div>
+</div>
