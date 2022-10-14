@@ -35,16 +35,7 @@ const nodeMailer = require("nodemailer");
 var morgan = require('morgan'); 
 var email = require('express-mailer');
 const fileUpload= require('express-fileupload')
-//app2.use(busboyBodyParser({ limit: '5mb'}));
-//app2.use(logger('dev'));
-//app2.use((req,res,next)=>{
- //res.header('Access-Control-Allow-Origin','*');
-//res.header('Access-Control-Allow-Methods','GET,PUT,POST,DELETE');
- //res.header('Access-Control-Allow-Headers','Content-Type,Authorization');
-  //next();
 
-
-//});
 
 app.use(morgan('dev'));  
 app.use(bodyParser.json());
